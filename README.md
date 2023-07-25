@@ -12,7 +12,7 @@ The full name of $Adaboost$ is $Adaptive\ Boosting$, which is an adaptive boosti
 
 #### 1.2. Algorithm process of $AdaBoost$
 
-Existing training data set $T=\left\{(x_1,y_1),(x_2,y_2),...,(x_n,y_n)\right\}$, where each sample point consists of an instance and a label, instance $x_i\in\chi\subseteq\mathcal{R}^n$, label $y_i\in\mathcal{Y}=\left\{-1,+1\right\}$, $\chi $ is the instance space, $\mathcal{Y}$ is the set of markers, we want to output a final classifier function $G(x)$
+Existing training data set $T=\{(x_1,y_1),(x_2,y_2),...,(x_n,y_n)\right\}$, where each sample point consists of an instance and a label, instance $x_i\in\chi\subseteq\mathcal{R}^n$, label $y_i\in\mathcal{Y}=\{-1,+1\right\}$, $\chi $ is the instance space, $\mathcal{Y}$ is the set of markers, we want to output a final classifier function $G(x)$
 
 (1) Initialize the weight distribution of the training data:
 
@@ -22,9 +22,9 @@ Even if it is assumed that in the first round of weak classifiers, each training
 
 (2) For $m=1,2,...,M$, it indicates the number of iterations
 
- (a) Use the training data set with weight distribution $D_m$ to learn, and get the basic classifier: $G_m(x):\chi\rightarrow\left\{-1,+1\right\}$
+ (a) Use the training data set with weight distribution $D_m$ to learn, and get the basic classifier: $G_m(x):\chi\rightarrow\{-1,+1\right\}$
 
- (b) Calculate the classification error rate of $G_m(x)$ on the training data set $e_m=\sum_{i=1}^NP(G_m(x_i)\neq y_i)=\sum_{i=1}^Nw_{mi}I_{\left\{G_m(x_i)\neq y_i\right\}}$
+ (b) Calculate the classification error rate of $G_m(x)$ on the training data set $e_m=\sum_{i=1}^NP(G_m(x_i)\neq y_i)=\sum_{i=1}^Nw_{mi}I_{\{G_m(x_i)\neq y_i\right\}}$
 
  (c) Calculate the coefficient of $G_m(x)$: $\alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$
 
@@ -40,7 +40,7 @@ Even if it is assumed that in the first round of weak classifiers, each training
 
 There are many things in the above algorithm process, such as how the coefficient of $G_m(x)$ comes from, where is the loss function, how to minimize the loss function, and how to ensure that the algorithm is convergent, why the weights need to be updated in this way, will now be explained here one by one.
 
-A certain round of classifier is $f_m(x)=f_{m-1}(x)+\alpha_mG_m(x)$, in addition, $AdaBoost$ uses an exponential loss function, and the loss function form of each round is $L(y,f(x))=\frac{1}{N}\sum_{i=1}^N e^{-y_if(x_i)}$, where $y_i$ is the real value, $f( x_i)$ is a prediction function with weight, greater than $0$ represents the positive class, and it may be less than $0$ represents the negative class, $y_i=\left\{-1,+1\right\}$, it can be seen that if the prediction is correct, then $y_if(x_i)>0$; if the prediction is wrong, then $y_if(x_i)=<0$, it can be seen that the loss function value of the wrong prediction is larger than the loss function value of the correct prediction, where $e^{-y_if(x_i)}$ Also in this round, the weight $w_{mi}$ of each sample shows that the weight value of each misclassification is larger, we minimize the loss function $L(y,f(x))$, that is, we will give priority to reducing the prediction error, that is, we must find a minimum $\alpha_m$ in each round of iterations so that $L(y,f(x))$ is the smallest, which is:
+A certain round of classifier is $f_m(x)=f_{m-1}(x)+\alpha_mG_m(x)$, in addition, $AdaBoost$ uses an exponential loss function, and the loss function form of each round is $L(y,f(x))=\frac{1}{N}\sum_{i=1}^N e^{-y_if(x_i)}$, where $y_i$ is the real value, $f( x_i)$ is a prediction function with weight, greater than $0$ represents the positive class, and it may be less than $0$ represents the negative class, $y_i=\{-1,+1\right\}$, it can be seen that if the prediction is correct, then $y_if(x_i)>0$; if the prediction is wrong, then $y_if(x_i)=<0$, it can be seen that the loss function value of the wrong prediction is larger than the loss function value of the correct prediction, where $e^{-y_if(x_i)}$ Also in this round, the weight $w_{mi}$ of each sample shows that the weight value of each misclassification is larger, we minimize the loss function $L(y,f(x))$, that is, we will give priority to reducing the prediction error, that is, we must find a minimum $\alpha_m$ in each round of iterations so that $L(y,f(x))$ is the smallest, which is:
 
 <font color="#dd000">$argmin_{\alpha_m}L(y,f(x))=argmin_{\alpha_m}[\frac{1}{N}\sum_{i=1}^N e^{-y_if(x_i)}]=argmin_{\alpha_m}\sum_{i=1}^Ne^{-y_i[f_{m- 1}(x_i)+\alpha_mG_m(x_i)]}$</font>
 
@@ -48,25 +48,25 @@ A certain round of classifier is $f_m(x)=f_{m-1}(x)+\alpha_mG_m(x)$, in addition
 
 We know that the loss function is: $L(y,f(x))=\frac{1}{N}\sum_{i=1}^N e^{-y_if(x_i)}$
 
-$\therefore L(y,f(x))=\frac{1}{N}\sum_{i=1}^N e^{-y_if(x_i)}=\sum_{i=1}^Ne^{-y_if_{m-1}(x_i)}\cdot e^{-y_i\alpha_mG_m(x_i)}$, $\because w_{mi}=e^{- y_if(x_i)}$,
+$ L(y,f(x))=\frac{1}{N}\sum_{i=1}^N e^{-y_if(x_i)}=\sum_{i=1}^Ne^{-y_if_{m-1}(x_i)}\cdot e^{-y_i\alpha_mG_m(x_i)}$, $ w_{mi}=e^{- y_if(x_i)}$,
 
-And $\because$ if the classification is correct, then $y_iG_m(x_i)=1$, if the classification is wrong, then $y_iG_m(x_i)=-1$,
+And $$ if the classification is correct, then $y_iG_m(x_i)=1$, if the classification is wrong, then $y_iG_m(x_i)=-1$,
 
-$\therefore L(y,f(x))=\sum_{i=1}^Nw_{mi}\cdot e^{-y_i\alpha_mG_m(x_i)}=\sum_{y_i=G_m(x_i)}w_{mi}e^{-\alpha_m}+\sum_{y_i\neq G_m(x_i)}w_{mi}e^{\ alpha_m}$
+$ L(y,f(x))=\sum_{i=1}^Nw_{mi}\cdot e^{-y_i\alpha_mG_m(x_i)}=\sum_{y_i=G_m(x_i)}w_{mi}e^{-\alpha_m}+\sum_{y_i\neq G_m(x_i)}w_{mi}e^{\ alpha_m}$
 
 $=e^{-\alpha_m}\big(\sum_{i=1}^Nw_{mi}-\sum_{y_i\neq G_m(x_i)}w_{mi}\big)+\sum_{y_i\neq G_m(x_i)}w_{mi}e^{\alpha_m}=e^{-\alpha_m}\sum_{i=1}^N w_{mi}+(e^{\alpha_m}-e^{-\alpha_m})\sum_{y_i\neq G_m(x_i)}w_{mi}$
 
 The reason why we do this is to express the loss function with error points as much as possible. In order to minimize the loss function, we will derive the loss function with respect to $\alpha_m$:
 
-$\therefore \frac{\partial L}{\partial \alpha_m}=-e^{-\alpha_m}\sum_{i=1}^Nw_{mi}+(e^{\alpha_m}+e^{-\alpha_m})\sum_{y_i\neq G_m(x_i)}w_{mi}=0$
+$ \frac{\partial L}{\partial \alpha_m}=-e^{-\alpha_m}\sum_{i=1}^Nw_{mi}+(e^{\alpha_m}+e^{-\alpha_m})\sum_{y_i\neq G_m(x_i)}w_{mi}=0$
 
-$\therefore -\sum_{i=1}^Nw_{mi}+(e^{2\alpha_m}+1)\sum_{y_i\neq G_m(x_i)}w_{mi}=0$,
+$ -\sum_{i=1}^Nw_{mi}+(e^{2\alpha_m}+1)\sum_{y_i\neq G_m(x_i)}w_{mi}=0$,
 
-$\therefore e^{2\alpha_m}=\frac{\sum_{i=1}^Nw_{mi}}{\sum_{y_i\neq G_m(x_i)}w_{mi}}-1=\frac{\sum_{i=1}^Nw_{mi}-\sum_{y_i\neq G_m(x_i)}w_{mi}}{\sum_ {y_i\neq G_m(x_i)}w_{mi}}=\frac{\sum_{y_i= G_m(x_i)}w_{mi}}{\sum_{y_i\neq G_m(x_i)}w_{mi}}=\frac{1-e_m}{e_m}$
+$ e^{2\alpha_m}=\frac{\sum_{i=1}^Nw_{mi}}{\sum_{y_i\neq G_m(x_i)}w_{mi}}-1=\frac{\sum_{i=1}^Nw_{mi}-\sum_{y_i\neq G_m(x_i)}w_{mi}}{\sum_ {y_i\neq G_m(x_i)}w_{mi}}=\frac{\sum_{y_i= G_m(x_i)}w_{mi}}{\sum_{y_i\neq G_m(x_i)}w_{mi}}=\frac{1-e_m}{e_m}$
 
-<font color="#dd000">$\therefore \alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$</font>
+<font color="#dd000">$ \alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$</font>
 
-So far, we have deduced the process of $\therefore \alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$, which is actually the coefficient obtained by minimizing the loss function. <font color="#dd000">This coefficient has two functions:</font>
+So far, we have deduced the process of $ \alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$, which is actually the coefficient obtained by minimizing the loss function. <font color="#dd000">This coefficient has two functions:</font>
 
 <font color="#dd000">①. Minimize error loss</font>
 
@@ -100,17 +100,17 @@ Suppose we get a final classifier $G(x)=signf(x)$ after training, then the train
 
 <font color="#dd000">$\frac{1}{N}\sum_{i=1}^NI(G(x_i)\neq y_i)\leq\frac{1}{N}\sum_ie^{-y_if(x_i)}=\prod_mZ_m$</font>, where $Z_m=\sum_{i=1}^Nw_{mi}e^ {-\alpha_my_iG_m(x_i)}$ is the normalization factor
 
-Proof: $\because \frac{1}{N}\sum_{i=1}^NI(G(x_i)\neq y_i)=\frac{1}{N}(\sum_{y_i=G(x_i)}0+\sum_{y_i\neq G(x_i)}1)$,
+Proof: $ \frac{1}{N}\sum_{i=1}^NI(G(x_i)\neq y_i)=\frac{1}{N}(\sum_{y_i=G(x_i)}0+\sum_{y_i\neq G(x_i)}1)$,
 
-$\because 0<e^{-y_if(x_i)}$ and if the classification is incorrect, namely $y_i\neq G(x_i)$, then $1\leq e^{-y_if(x_i)}$, $\therefore \frac{1}{N}\sum_{i=1}^NI(G(x_i)\neq y_i)\leq \frac{1}{N}( \sum_{y_i=G(x_i)}e^{-y_if(x_i)}+\sum_{y_i\neq G(x_i)}e^{-y_if(x_i)})=\frac{1}{N}\sum_ie^{-y_if(x_i)}$
+$ 0<e^{-y_if(x_i)}$ and if the classification is incorrect, namely $y_i\neq G(x_i)$, then $1\leq e^{-y_if(x_i)}$, $ \frac{1}{N}\sum_{i=1}^NI(G(x_i)\neq y_i)\leq \frac{1}{N}( \sum_{y_i=G(x_i)}e^{-y_if(x_i)}+\sum_{y_i\neq G(x_i)}e^{-y_if(x_i)})=\frac{1}{N}\sum_ie^{-y_if(x_i)}$
 
 That is to prove that <font color="#dd000">$\frac{1}{N}\sum_{i=1}^NI(G(x_i)\neq y_i)\leq\frac{1}{N}\sum_ie^{-y_if(x_i)}$</font>
 
-And $\because \frac{1}{N}\sum_ie^{-y_if(x_i)}=\frac{1}{N}\sum_ie^{-y_i\sum_{m=1}^M\alpha_mG_m(x_i)}=\frac{1}{N}\sum_ie^{\sum_{m=1}^M-\alpha_my_iG _m(x_i)}=\frac{1}{N}\sum_i\bigg[e^{-\alpha_1y_iG_1(x_i)}\cdot e^{-\sum_{m=2}^M\alpha_my_iG_m(x_i)}\bigg]$, and $w_{1i}=\frac{1}{N}$, $\therefore \frac {1}{N}\sum_ie^{-y_if(x_i)}=\sum_iw_{1i}e^{-\alpha_1y_iG_1(x_i)}\cdot e^{-\sum_{m=2}^M\alpha_my_iG_m(x_i)}$
+And $ \frac{1}{N}\sum_ie^{-y_if(x_i)}=\frac{1}{N}\sum_ie^{-y_i\sum_{m=1}^M\alpha_mG_m(x_i)}=\frac{1}{N}\sum_ie^{\sum_{m=1}^M-\alpha_my_iG _m(x_i)}=\frac{1}{N}\sum_i\bigg[e^{-\alpha_1y_iG_1(x_i)}\cdot e^{-\sum_{m=2}^M\alpha_my_iG_m(x_i)}\bigg]$, and $w_{1i}=\frac{1}{N}$, $ \frac {1}{N}\sum_ie^{-y_if(x_i)}=\sum_iw_{1i}e^{-\alpha_1y_iG_1(x_i)}\cdot e^{-\sum_{m=2}^M\alpha_my_iG_m(x_i)}$
 
-And $\because w_{m+1,i}=\frac{1}{Z_m}w_{m,i}e^{-\alpha_my_iG_m(x_i)}$, $\therefore w_{2,i}=\frac{1}{Z_1}w_{1,i}e^{-\alpha_1y_iG_1(x_i)}$, $\therefore Z_ 1w_{2,i}=w_{1,i}e^{-\alpha_1y_iG_1(x_i)}$
+And $ w_{m+1,i}=\frac{1}{Z_m}w_{m,i}e^{-\alpha_my_iG_m(x_i)}$, $ w_{2,i}=\frac{1}{Z_1}w_{1,i}e^{-\alpha_1y_iG_1(x_i)}$, $ Z_ 1w_{2,i}=w_{1,i}e^{-\alpha_1y_iG_1(x_i)}$
 
-$\therefore \frac{1}{N}\sum_ie^{-y_if(x_i)}=Z_1\sum_iw_{2,i}e^{-\sum_{m=2}^M\alpha_my_iG_m(x_i)}$, similarly, $\frac{1}{N}\sum_ie^{-y_if(x_i)}=Z_1Z_2\ sum_iw_{3,i}e^{-\sum_{m=3}^M\alpha_my_iG_m(x_i)}=...=Z_1Z_2\cdot...\cdot Z_m=\prod_m Z_m$, which is $\frac{1}{N}\sum_ie^{-y_if(x_i)}=\prod_m Z_m$
+$ \frac{1}{N}\sum_ie^{-y_if(x_i)}=Z_1\sum_iw_{2,i}e^{-\sum_{m=2}^M\alpha_my_iG_m(x_i)}$, similarly, $\frac{1}{N}\sum_ie^{-y_if(x_i)}=Z_1Z_2\ sum_iw_{3,i}e^{-\sum_{m=3}^M\alpha_my_iG_m(x_i)}=...=Z_1Z_2\cdot...\cdot Z_m=\prod_m Z_m$, which is $\frac{1}{N}\sum_ie^{-y_if(x_i)}=\prod_m Z_m$
 
 <font color="#dd000">The proof is: $\frac{1}{N}\sum_{i=1}^NI(G(x_i)\neq y_i)\leq\frac{1}{N}\sum_ie^{-y_if(x_i)}=\prod_m Z_m$</font>
 
@@ -120,15 +120,15 @@ For the binary classification problem, the above $\prod_m Z_m$ also has an upper
 
 $\prod_m Z_m=\prod_m2\sqrt{e_m(1-e_m)}=\prod_m\sqrt{1-4\gamma_{m}^2}\leq e^{-2\sum_m\gamma_{m}^2}$
 
-Prove: $\because Z_m=\sum_{i=1}^Nw_{mi}e^{-\alpha_my_iG_m(x_i)}=\sum_{y_i=G_m(x_i)}w_{mi}e^{-\alpha_m}+\sum_{y_i\neq G_m(x_i)}w_{mi}e^{\alpha_m}=( \sum_iw_{mi}-e_m)e^{-\alpha_m}+e_me^{\alpha_m}$
+Prove: $ Z_m=\sum_{i=1}^Nw_{mi}e^{-\alpha_my_iG_m(x_i)}=\sum_{y_i=G_m(x_i)}w_{mi}e^{-\alpha_m}+\sum_{y_i\neq G_m(x_i)}w_{mi}e^{\alpha_m}=( \sum_iw_{mi}-e_m)e^{-\alpha_m}+e_me^{\alpha_m}$
 
 $=(1-e_m)e^{-\alpha_m}+e_me^{\alpha_m}\geq 2\sqrt{(1-e_m)e_m}$
 
 It can be seen from the basic inequality that the above equal sign is equal if and only when $(1-e_m)e^{-\alpha_m}=e_me^{\alpha_m}$, at this time it happens that $\alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$ is the classifier coefficient obtained before, indicating that the inequality can be equal on the basis of the above algorithm.
 
-$\therefore Z_m=2\sqrt{(1-e_m)e_m}$, that is to prove <font color="#dd000">$\prod_m Z_m=\prod_m2\sqrt{e_m(1-e_m)}$</font>
+$ Z_m=2\sqrt{(1-e_m)e_m}$, that is to prove <font color="#dd000">$\prod_m Z_m=\prod_m2\sqrt{e_m(1-e_m)}$</font>
 
-And $\because 2\sqrt{(1-e_m)e_m}=2\sqrt{e_m-e_m^2}=\sqrt{4e_m-4e_m^2}=\sqrt{1-(4e_m^2-4e_m+1)}=\sqrt{1-(2e_m-1)^2}$, let $\gamma_m=\frac{1}{ 2}-e_m$,
+And $ 2\sqrt{(1-e_m)e_m}=2\sqrt{e_m-e_m^2}=\sqrt{4e_m-4e_m^2}=\sqrt{1-(4e_m^2-4e_m+1)}=\sqrt{1-(2e_m-1)^2}$, let $\gamma_m=\frac{1}{ 2}-e_m$,
 
 Then $2\sqrt{(1-e_m)e_m}=\sqrt{1-4\gamma_m^2}$, that is to prove <font color="#dd000">$\prod_m Z_m=\prod_m2\sqrt{1-4\gamma_m^2}$</font>
 
@@ -140,9 +140,9 @@ First, Taylor expands $\sqrt{1-4x^2}$ at $x=0$, that is, $\sqrt{1-4x^2}=1-\frac{
 
 Then $e^{-2x^2}$ is Taylor expanded at $x=0$, that is, $e^{-2x^2}=1-\frac{2}{1!}x+\frac{4}{2!}x^2-\frac{8}{3!}x^3+...$
 
-It can be seen that $\sqrt{1-4x^2}$ only has negative items, while $e^{-2x^2}$ has positive and negative items, and the negative items are relatively small, $\therefore \sqrt{1-4x^2}\leq e^{-2x^2}$
+It can be seen that $\sqrt{1-4x^2}$ only has negative items, while $e^{-2x^2}$ has positive and negative items, and the negative items are relatively small, $ \sqrt{1-4x^2}\leq e^{-2x^2}$
 
-$\therefore \prod_m\sqrt{1-4\gamma_m^2}\leq e^{-2\sum_m\gamma_m^2}$
+$ \prod_m\sqrt{1-4\gamma_m^2}\leq e^{-2\sum_m\gamma_m^2}$
 
 To sum up, <font color="#dd000">$\prod_m Z_m=\prod_m2\sqrt{e_m(1-e_m)}=\prod_m\sqrt{1-4\gamma_{m}^2}\leq e^{-2\sum_m\gamma_{m}^2}$</font>
 
