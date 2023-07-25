@@ -86,7 +86,7 @@ First of all, we know that because the classification error rate of a weak class
 
 ②If $y_i\neq G_m(x_i)arrow w_{m+1,i}=w_{mi}e^{\alpha_m}$, the judgment is wrong:
 
- At this time, from $e_m\leq \frac{1}{2}$, that is, the error rate is less than $50\%$, then according to $\alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$, it can be known that $\alpha_m>0$, the weight of the classifier at this time is large, and more importantly, $w_{m+1,i}$ means that the weight of the next round of error samples will become larger;
+ At this time, from $e_m\leq \frac{1}{2}$, that is, the error rate is less than $50\%$, then according to $\alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$, it can be known that $\alpha_m\geq 0$, the weight of the classifier at this time is large, and more importantly, $w_{m+1,i}$ means that the weight of the next round of error samples will become larger;
 
 <font color="#dd000">This is the magic of the $AdaBoost$ serial adaptive algorithm, which always increases the weight of misclassified samples in each round, so that the next round will pay more attention to those wrong samples. </font>
 
