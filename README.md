@@ -104,9 +104,9 @@ Proof: $ \frac{1}{N}\sum_{i=1}^NI(G(x_i)\neq y_i)=\frac{1}{N}(\sum_{y_i=G(x_i)}0
 
 $ 0<e^{-y_if(x_i)}$ and if the classification is incorrect, namely $y_i\neq G(x_i)$, then $1\leq e^{-y_if(x_i)}$, $ \frac{1}{N}\sum_{i=1}^NI(G(x_i)\neq y_i)\leq \frac{1}{N}( \sum_{y_i=G(x_i)}e^{-y_if(x_i)}+\sum_{y_i\neq G(x_i)}e^{-y_if(x_i)})=\frac{1}{N}\sum_ie^{-y_if(x_i)}$
 
-That is to prove that <font color="#dd000">$\frac{1}{N}\sum_{i=1}^NI(G(x_i)\neq y_i)\leq\frac{1}{N}\sum_ie^{-y_if(x_i)}$</font>
+That is to prove that $\frac{1}{N}\sum_{i=1}^NI(G(x_i)\neq y_i)\leq\frac{1}{N}\sum_ie^{-y_if(x_i)}$
 
-And $ \frac{1}{N}\sum_ie^{-y_if(x_i)}=\frac{1}{N}\sum_ie^{-y_i\sum_{m=1}^M\alpha_mG_m(x_i)}=\frac{1}{N}\sum_ie^{\sum_{m=1}^M-\alpha_my_iG _m(x_i)}=\frac{1}{N}\sum_i\bigg[e^{-\alpha_1y_iG_1(x_i)}\cdot e^{-\sum_{m=2}^M\alpha_my_iG_m(x_i)}\bigg]$, and $w_{1i}=\frac{1}{N}$, $ \frac {1}{N}\sum_ie^{-y_if(x_i)}=\sum_iw_{1i}e^{-\alpha_1y_iG_1(x_i)}\cdot e^{-\sum_{m=2}^M\alpha_my_iG_m(x_i)}$
+And $\frac{1}{N}\sum_ie^{-y_if(x_i)}=\frac{1}{N}\sum_ie^{-y_i\sum_{m=1}^M\alpha_mG_m(x_i)}=\frac{1}{N}\sum_ie^{\sum_{m=1}^M-\alpha_my_iG _m(x_i)}=\frac{1}{N}\sum_i e^{-\alpha_1y_iG_1(x_i)}\cdot e^{-\sum_{m=2}^M\alpha_my_iG_m(x_i)}$, and $w_{1i}=\frac{1}{N}$, $ \frac {1}{N}\sum_ie^{-y_if(x_i)}=\sum_iw_{1i}e^{-\alpha_1y_iG_1(x_i)}\cdot e^{-\sum_{m=2}^M\alpha_my_iG_m(x_i)}$
 
 And $ w_{m+1,i}=\frac{1}{Z_m}w_{m,i}e^{-\alpha_my_iG_m(x_i)}$, $ w_{2,i}=\frac{1}{Z_1}w_{1,i}e^{-\alpha_1y_iG_1(x_i)}$, $ Z_ 1w_{2,i}=w_{1,i}e^{-\alpha_1y_iG_1(x_i)}$
 
