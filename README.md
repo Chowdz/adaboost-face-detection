@@ -78,15 +78,15 @@ It can be seen from the above: $w_{m+1,i}=e^{-y_if_m(x_i)}=e^{-y_i(f_{m-1}(x_i)+
 
 That is to get $w_{m+1,i}=w_{mi}e^{-y_i\alpha_mG_m(x_i)}$, here we need a classification discussion to understand:
 
-First of all, we know that because the classification error rate of a weak classifier is always a little better than random guessing, so we select a certain segmentation point as a weak classifier in one round, then we must choose a classification error rate less than $\frac{1}{2}$, that is, limit $e_m<\frac{1}{2}$, that is, the error rate is less than $50\%$
+First of all, we know that because the classification error rate of a weak classifier is always a little better than random guessing, so we select a certain segmentation point as a weak classifier in one round, then we must choose a classification error rate less than $\frac{1}{2}$, that is, limit $e_m\leq \frac{1}{2}$, that is, the error rate is less than $50\%$
 
 ①If $y_i=G_m(x_i)arrow w_{m+1,i}=w_{mi}e^{-\alpha_m}$, the judgment is correct, then:
 
- At this time, from $e_m<\frac{1}{2}$, that is, the error rate is less than $50\%$, then according to $\alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$, it can be seen that $\alpha_m>0$, the weight of the classifier at this time is large, and more importantly, $w_{m+1,i}$ means that the weight of the next round of correct samples will become smaller;
+ At this time, from $e_m\leq \frac{1}{2}$, that is, the error rate is less than $50\%$, then according to $\alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$, it can be seen that $\alpha_m\geq 0$, the weight of the classifier at this time is large, and more importantly, $w_{m+1,i}$ means that the weight of the next round of correct samples will become smaller;
 
 ②If $y_i\neq G_m(x_i)arrow w_{m+1,i}=w_{mi}e^{\alpha_m}$, the judgment is wrong:
 
- At this time, from $e_m<\frac{1}{2}$, that is, the error rate is less than $50\%$, then according to $\alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$, it can be known that $\alpha_m>0$, the weight of the classifier at this time is large, and more importantly, $w_{m+1,i}$ means that the weight of the next round of error samples will become larger;
+ At this time, from $e_m\leq \frac{1}{2}$, that is, the error rate is less than $50\%$, then according to $\alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$, it can be known that $\alpha_m>0$, the weight of the classifier at this time is large, and more importantly, $w_{m+1,i}$ means that the weight of the next round of error samples will become larger;
 
 <font color="#dd000">This is the magic of the $AdaBoost$ serial adaptive algorithm, which always increases the weight of misclassified samples in each round, so that the next round will pay more attention to those wrong samples. </font>
 
