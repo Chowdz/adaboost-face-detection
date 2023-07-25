@@ -163,25 +163,26 @@ The basic idea of $AdaBoost$ face detection is divided into three parts. First, 
 First of all, it is easier to understand that each area of the face has light and shade changes. It is easier for us to conclude that the area of the eyes is always darker than the color of the cheeks below the eyes. The sum of pixels in these two areas is significantly different from that of non-human faces, and the color of the eyes is always darker than the middle of the eyes, as shown in the following figure:
 
 ![](/Pic/1.png)
+
 We use this rectangular frame to calculate the pixel difference between the white rectangle and the black rectangle, which is a feature value that can be compared with non-face data. Of course, these rectangular features are not only these two, such as the pixel values of the mouth and around the mouth. $8$ Rectangular features:
 
 ![](/Pic/2.png)
 
 Among them, $ A1 $ and $ A2 $ are edge features, $ B1 $, $ B2 $, $ B3 $, $ B4 $ are linear features, $ C1 $ is rotating features, $ d1 $ is the center of characteristics. Each feature rectangle is a picture from left to right, according to the arbitrary scale and any proportion, respectively Go to calculate the pixel difference between the white rectangular area and the black rectangular area **. Because it is any location, any scale, and any proportion to scan a picture. The rough scanning process is as follows:
 
-![image-20221206185813945](C:\Users\56966\AppData\Roaming\Typora\typora-user-images\image-20221206185813945.png)
+![](/Pic/10.png)
 
 So even a picture of $24\times24$ pixels, a rectangular feature, will generate about $7000$ million pieces of data under the $5000$ sample set, so how to quickly extract these features is a problem.
 
 Therefore, according to "$Rapid\ Object\ Detection\ Using\ a\ Boosted\ Cascade\ of\ Simple\ Features$", a method of integral graph is proposed. We first calculate the value of the pixel sum in the upper left corner of each pixel of a picture, as the value of the pixel point, which is the integral graph. Then the pixel sum of any area of the picture is composed of the linear combination of the pixel sum of $4$ partial area, as shown in the figure below:
 
-<img src="C:\Users\56966\AppData\Roaming\Typora\typora-user-images\image-20221206182025979.png" alt="image-20221206182025979" style="zoom:50%;" />
+![](/Pic/3.png)
 
 For example, the sum of pixels in the $D$ area is $Sum(D)=4-2-3+1$. In this way, as long as we calculate the integral map in advance, it is constant time to calculate the eigenvalue of any rectangular feature. The following is the calculation logic of each feature rectangle:
 
-![image-20221206183917564](C:\Users\56966\AppData\Roaming\Typora\typora-user-images\image-20221206183917564.png)
+![](/Pic/4.png)
 
-![image-20221206184053829](C:\Users\56966\AppData\Roaming\Typora\typora-user-images\image-20221206184053829.png)
+![](/Pic/5.png)
 
 
 
@@ -197,8 +198,8 @@ It is a detection window at any position on any scale in any picture. Non-human 
 
 Therefore, the idea of the cascade classifier is to disperse a large number of optimal features, and only calculate the best features first. If the face condition is satisfied, the next step is judged. The cascade classifier method can save $95\%$. The approximate calculation logic is as follows:
 
-<img src="C:\Users\56966\AppData\Roaming\Typora\typora-user-images\image-20221206185047756.png" alt="image-20221206185047756" style="zoom:67%;" />
+![](/Pic/8.png)
 
 The features of the detected face that are actually used are roughly as follows:
 
-<img src="C:\Users\56966\AppData\Roaming\Typora\typora-user-images\image-20221206185558280.png" alt="image-20221206185558280" style="zoom: 50%;" />
+![](/Pic/9.png)
