@@ -12,7 +12,7 @@ The full name of $Adaboost$ is $Adaptive\ Boosting$, which is an adaptive boosti
 
 #### 1.2. Algorithm process of $AdaBoost$
 
-Existing training data set $T=\{(x_1,y_1),(x_2,y_2),...,(x_n,y_n)\right\}$, where each sample point consists of an instance and a label, instance $x_i\in\chi\subseteq\mathcal{R}^n$, label $y_i\in\mathcal{Y}=\{-1,+1\right\}$, $\chi $ is the instance space, $\mathcal{Y}$ is the set of markers, we want to output a final classifier function $G(x)$
+Existing training data set $T=\{(x_1,y_1),(x_2,y_2),...,(x_n,y_n)\}$, where each sample point consists of an instance and a label, instance $x_i\in\chi\subseteq\mathcal{R}^n$, label $y_i\in\mathcal{Y}=\{-1,+1\}$, $\chi $ is the instance space, $\mathcal{Y}$ is the set of markers, we want to output a final classifier function $G(x)$
 
 (1) Initialize the weight distribution of the training data:
 
@@ -22,9 +22,9 @@ Even if it is assumed that in the first round of weak classifiers, each training
 
 (2) For $m=1,2,...,M$, it indicates the number of iterations
 
- (a) Use the training data set with weight distribution $D_m$ to learn, and get the basic classifier: $G_m(x):\chi\rightarrow\{-1,+1\right\}$
+ (a) Use the training data set with weight distribution $D_m$ to learn, and get the basic classifier: $G_m(x):\chiarrow\{-1,+1\}$
 
- (b) Calculate the classification error rate of $G_m(x)$ on the training data set $e_m=\sum_{i=1}^NP(G_m(x_i)\neq y_i)=\sum_{i=1}^Nw_{mi}I_{\{G_m(x_i)\neq y_i\right\}}$
+ (b) Calculate the classification error rate of $G_m(x)$ on the training data set $e_m=\sum_{i=1}^NP(G_m(x_i)\neq y_i)=\sum_{i=1}^Nw_{mi}I_{\{G_m(x_i)\neq y_i\}}$
 
  (c) Calculate the coefficient of $G_m(x)$: $\alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$
 
@@ -40,7 +40,7 @@ Even if it is assumed that in the first round of weak classifiers, each training
 
 There are many things in the above algorithm process, such as how the coefficient of $G_m(x)$ comes from, where is the loss function, how to minimize the loss function, and how to ensure that the algorithm is convergent, why the weights need to be updated in this way, will now be explained here one by one.
 
-A certain round of classifier is $f_m(x)=f_{m-1}(x)+\alpha_mG_m(x)$, in addition, $AdaBoost$ uses an exponential loss function, and the loss function form of each round is $L(y,f(x))=\frac{1}{N}\sum_{i=1}^N e^{-y_if(x_i)}$, where $y_i$ is the real value, $f( x_i)$ is a prediction function with weight, greater than $0$ represents the positive class, and it may be less than $0$ represents the negative class, $y_i=\{-1,+1\right\}$, it can be seen that if the prediction is correct, then $y_{i}f(x_i)>0$; if the prediction is wrong, then $y_if(x_i)=<0$, it can be seen that the loss function value of the wrong prediction is larger than the loss function value of the correct prediction, where $e^{-y_if(x_i)}$ Also in this round, the weight $w_{mi}$ of each sample shows that the weight value of each misclassification is larger, we minimize the loss function $L(y,f(x))$, that is, we will give priority to reducing the prediction error, that is, we must find a minimum $\alpha_m$ in each round of iterations so that $L(y,f(x))$ is the smallest, which is:
+A certain round of classifier is $f_m(x)=f_{m-1}(x)+\alpha_mG_m(x)$, in addition, $AdaBoost$ uses an exponential loss function, and the loss function form of each round is $L(y,f(x))=\frac{1}{N}\sum_{i=1}^N e^{-y_if(x_i)}$, where $y_i$ is the real value, $f( x_i)$ is a prediction function with weight, greater than $0$ represents the positive class, and it may be less than $0$ represents the negative class, $y_i=\{-1,+1\}$, it can be seen that if the prediction is correct, then $y_if(x_i)>0$; if the prediction is wrong, then $y_if(x_i)=<0$, it can be seen that the loss function value of the wrong prediction is larger than the loss function value of the correct prediction, where $e^{-y_if(x_i)}$ Also in this round, the weight $w_{mi}$ of each sample shows that the weight value of each misclassification is larger, we minimize the loss function $L(y,f(x))$, that is, we will give priority to reducing the prediction error, that is, we must find a minimum $\alpha_m$ in each round of iterations so that $L(y,f(x))$ is the smallest, which is:
 
 <font color="#dd000">$argmin_{\alpha_m}L(y,f(x))=argmin_{\alpha_m}[\frac{1}{N}\sum_{i=1}^N e^{-y_if(x_i)}]=argmin_{\alpha_m}\sum_{i=1}^Ne^{-y_i[f_{m- 1}(x_i)+\alpha_mG_m(x_i)]}$</font>
 
@@ -80,11 +80,11 @@ That is to get $w_{m+1,i}=w_{mi}e^{-y_i\alpha_mG_m(x_i)}$, here we need a classi
 
 First of all, we know that because the classification error rate of a weak classifier is always a little better than random guessing, so we select a certain segmentation point as a weak classifier in one round, then we must choose a classification error rate less than $\frac{1}{2}$, that is, limit $e_m<\frac{1}{2}$, that is, the error rate is less than $50\%$
 
-①If $y_i=G_m(x_i)\Rightarrow w_{m+1,i}=w_{mi}e^{-\alpha_m}$, the judgment is correct, then:
+①If $y_i=G_m(x_i)arrow w_{m+1,i}=w_{mi}e^{-\alpha_m}$, the judgment is correct, then:
 
  At this time, from $e_m<\frac{1}{2}$, that is, the error rate is less than $50\%$, then according to $\alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$, it can be seen that $\alpha_m>0$, the weight of the classifier at this time is large, and more importantly, $w_{m+1,i}$ means that the weight of the next round of correct samples will become smaller;
 
-②If $y_i\neq G_m(x_i)\Rightarrow w_{m+1,i}=w_{mi}e^{\alpha_m}$, the judgment is wrong:
+②If $y_i\neq G_m(x_i)arrow w_{m+1,i}=w_{mi}e^{\alpha_m}$, the judgment is wrong:
 
  At this time, from $e_m<\frac{1}{2}$, that is, the error rate is less than $50\%$, then according to $\alpha_m=\frac{1}{2}ln\frac{1-e_m}{e_m}$, it can be known that $\alpha_m>0$, the weight of the classifier at this time is large, and more importantly, $w_{m+1,i}$ means that the weight of the next round of error samples will become larger;
 
