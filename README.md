@@ -162,11 +162,10 @@ The basic idea of $AdaBoost$ face detection is divided into three parts. First, 
 
 First of all, it is easier to understand that each area of the face has light and shade changes. It is easier for us to conclude that the area of the eyes is always darker than the color of the cheeks below the eyes. The sum of pixels in these two areas is significantly different from that of non-human faces, and the color of the eyes is always darker than the middle of the eyes, as shown in the following figure:
 
-<img src="C:\Users\56966\AppData\Roaming\Typora\typora-user-images\image-20221206180044707.png" alt="image-20221206180044707" style="zoom: 50%;" />
-
+![](/Pic/1.png)
 We use this rectangular frame to calculate the pixel difference between the white rectangle and the black rectangle, which is a feature value that can be compared with non-face data. Of course, these rectangular features are not only these two, such as the pixel values of the mouth and around the mouth. $8$ Rectangular features:
 
-<img src="C:\Users\56966\AppData\Roaming\Typora\typora-user-images\image-20221206180628044.png" alt="image-20221206180628044" style="zoom: 50%;" />
+![](/Pic/2.png)
 
 Among them, $ A1 $ and $ A2 $ are edge features, $ B1 $, $ B2 $, $ B3 $, $ B4 $ are linear features, $ C1 $ is rotating features, $ d1 $ is the center of characteristics. Each feature rectangle is a picture from left to right, according to the arbitrary scale and any proportion, respectively Go to calculate the pixel difference between the white rectangular area and the black rectangular area **. Because it is any location, any scale, and any proportion to scan a picture. The rough scanning process is as follows:
 
